@@ -1,0 +1,83 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Poppins', sans-serif; }
+
+.mainindex {
+  box-sizing: border-box;
+  padding-bottom: 10px; }
+
+.headerfoot {
+  background-color: #343D40;
+  box-sizing: border-box; }
+
+h1 {
+  padding-top: 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 57px;
+  word-spacing: 3px;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+ul {
+  list-style: none;
+  font-size: 0px;
+  text-align: center;
+  font-weight: bold; }
+
+li {
+  display: inline-block;
+  width: 18%;
+  font-size: 18px;
+  position: center;
+  text-align: center; }
+
+.totalfoot {
+  padding-top: 0px;
+  display: grid;
+  grid-template-columns: 34% 33% 33%; }
+
+.foot {
+  display: grid;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center; }
+
+.logofoot {
+  padding-left: 120px;
+  padding-right: 120px;
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  color: white; }
+
+.contacto {
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  vertical-align: center; }
+
+.logosredes {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 50px 50px 50px; }
+
+.terminossuscripcion {
+  background-color: none;
+  font-size: 8.5px; }
+
+.separadorfoot {
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  color: black; }
+
+.Conversor {
+  color: black; }
+
+.Suscribirmeboxcatalogo {
+  color: black; }

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Front Calculadora</title>
+	<meta name="Description"
+		content="Esta pagina es para comercializar productos y crear comunidad entre artesanos y emprendedores">
+	<meta name="keyword"
+		content="centro comercial, artesanías, emprendedor, productos, productos hogar, ropa, accesorios, joyeria, artesanal">
+	<meta name="author" content="Jhon Florez">
+	<meta property="og:locale" content="es_es">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Centro Comercial Artesanal">
+	<meta property="og:description"
+		content="compra los mejores productos típicos y exclusivos de artesanos y emprendedores">
+	<meta property="og:url" content="">
+
+
+	<link rel="stylesheet" href="CSS\proyectojs.css">
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+	<header>
+		<div>
+			<nav class=" navbar navbar-expand-sm bg-dark navbar-dark ">
+				<a class="navbar-brand" href="index.html">
+					<img src="Imagenes\Logo.png" alt="logo" style="width:120px;">
+				</a>
+				<ul class="navbar-nav" style="width:600px;" style="text-align: start;">
+					<li class="nav-item" style="width:100px;">
+						<a class="nav-link" href="#">Simuladores </a>
+					</li>
+
+					<li class="nav-item" style="width:100px;">
+						<a class="nav-link" id="simuladores" href="#"></a>
+					</li>
+					<li class="nav-item" style="width:100px;">
+						<a class="nav-link" id="trm" href="#">TRM</a>
+					</li>
+
+				</ul>
+
+
+
+
+			</nav>
+		</div>
+
+
+	</header>
+
+	<main class="mainindex ">
+
+
+
+	<div id="conversores"></div>
+	
+
+		
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1>Conversor de Tasas</h1>
+				<p>A continuación podrás convertir las tasas; de Efectiva (E.A.) a Nominal Mensual (T.N.M) y viceversa
+				</p>
+			</div>
+
+			<hr>
+			<div class="separadorfoot" form-group col-xs-12 col-xs-12 col-md-6 col-lg-4>
+				
+				<form class="Suscribirmeboxcatalogo" id="formulario">
+					<fieldset >
+						<div>
+							<label for="Valor">Tasa Nominal Mensual </label>
+							<input type="number" id="Tasa" step="0.001"  placeholder="Escribe la Tasa Nominal Mensual" name="Valor" class="form-control">
+						</div>
+						<br>
+						<div>
+							<button  type="submit"  >Convertir</button>
+						</div>
+					</fieldset>
+
+						<br>
+						<div >
+							<label for="Tasa">Tasa Nominal Mensual convertida a Efectiva Anual </label>
+							<input id="tasaEAFinal"  type="readonly" name="Resultado" class="form-control">
+
+						</div>
+
+				
+				</form>
+			</div>
+
+			<hr>
+			<div class="separadorfoot" form-group col-xs-12 col-xs-12 col-md-6 col-lg-4>
+				
+				<form class="Suscribirmeboxcatalogo" id="formularioDos">
+					<fieldset>
+						<div>
+							<label for="Valor">Tasa Efectiva Anual </label>
+							<input type="number" id="tasaDos" step="0.001"  	placeholder="Escribe la Tasa Efectiva Anual" name="Valor" class="form-control">
+						</div>
+			
+						
+						<br>
+						<div>
+							<button  type="submit" >Convertir</button>
+						</div>
+					
+					</fieldset>
+
+						<br>
+						<div>
+							<label for="Tasados">Tasa Efectiva Anual convertida a Nominal Mensual </label>
+							<input id="tasaNMVFinal"
+							type="readonly" name="Resultado" class="form-control">
+
+						</div>
+
+				
+				</form>
+			</div>
+
+
+
+		</div>
+
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1>Calculadora de intereses</h1>
+				<p>A continuación podrás realizar el cálculo de íntereses de una compra o avance</p>
+			</div>
+
+			<div class="separadorfoot" form-group col-xs-12 			col-xs-12 col-md-6 col-lg-4>
+				<p></p>
+
+				<form id="formularioTres">
+					<fieldset>
+						<div>
+							<label for="fromDate">Fecha Inicial:</label>
+							<input type="date" id="fromDate" name="fromDate">
+							<br>
+							<label for="toDate">Fecha Final :</label>
+							<input type="date" id="toDate" name="toDate">
+						</div>
+
+						<div>
+							<button type="submit" id="show">Calcular Dias </button>
+							<br/><br/>
+							<label for="dateDiff">Dias de Diferencia</label>
+							<input type="text" id="dateDiff" name="dateDiff">
+
+						</div>
+
+						<div>
+							<label for="Valor">Valor </label>
+							<input id="valorIngresado"	type="number" placeholder="Escribe el valor de la compra" step="0.001" min="1" name="Valor" class="form-control">
+						</div>
+						<br>
+					
+
+
+						<div>
+							<label for="Tasa">Tasa </label>
+							<input id="tasaIngresada" type="number" placeholder="Escribe la Tasa Nominal Mensual" step="0.001" name="Tasa" class="form-control">
+						</div>
+						<br>
+
+						<div>
+							<button  type="submit" >Calcular Valor de Interes</button>
+						</div>
+
+					</fieldset>
+
+					<br>
+					<div>
+						<label for="Tasa">Resultado </label>
+						<input id="valorInteresFinal" type="readonly" name="Resultado" class="form-control">
+
+					</div>
+
+				</form>
+			</div>
+
+
+
+		</div>
+
+
+
+
+
+
+
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1>En Construccion...</h1>
+				<br>
+				<h1>Calculadora de compras</h1>
+				<p>A continuación podrás proyectar una compra o avance</p>
+			</div>
+				<hr>
+				<div class="separadorfoot" form-group col-xs-12 col-xs-12 col-md-6 col-lg-4>
+					
+					<form id="formularioCuatro" class="Suscribirmeboxcatalogo">
+						<fieldset >
+							<div>
+								<label for="fromDate">Fecha Inicial:</label>
+								<input type="date" id="fromDate" name="fromDate2">
+								<br>
+								<label for="toDate">Fecha Final :</label>
+								<input type="date" id="toDate" name="toDate2">
+							</div>
+	
+							<div>
+								<button type="submit" id="show2">Calcular Dias </button>
+								<br/><br/>
+								<label for="dateDiff2">Dias de Diferencia</label>
+								<input type="text" id="dateDiff2" name="dateDiff">
+	
+							</div>
+							<br>
+							<div>
+								<label for="Plazopactado">Plazo pactado </label>
+								<input type="number" id="plazoPactado" min="1" max="60" placeholder="Escribe el plazo" name="Plazopactado" class="form-control">
+							
+								<label for="Tasapactada">Tasa pactada</label>
+								<input type="number" id="tasaPactada" placeholder="Escribe la tasa" name="Tasapactada" class="form-control">
+							</div>
+							<div>
+								<label for="Valordecompra">Valor de la compra </label>
+								<input type="number" id="valorDeCompra" placeholder="Escribe el valor de la compra" name="Valordecompra" class="form-control">
+							</div>
+							<div>
+								<label for="Valordecuotamanejo">Valor de la cuota de manejo </label>
+								<input type="number" id="valorDeCuotaDeManejo" placeholder="Escribe el valor de la cuota de manejo" name="Valordecuotamanejo" class="form-control">
+							</div>
+						<br>
+						<br>
+							<div>
+								<button  type="submit"  >Crear tabla de  amortizacion</button>
+							</div>
+						</fieldset>
+						<br>
+					</form>
+  			</div>
+				<div id="tablaDeAmortizacion">
+				</div>
+				<hr>
+			</div>
+		</div>
+
+
+	</div>
+	</div>
+	</main>
+
+
+
+
+	<footer class="headerfoot ">
+
+		<div class="totalfoot col-xs-12 col-xs-12 col-md-12 col-lg-12 row">
+
+			<div class="logofoot col-xs-12 col-xs-12 col-md-6 col-lg-4">
+
+			</div>
+
+			<div class="foot col-xs-12 col-xs-12 col-md-6 col-lg-4">
+
+				<div class="contacto  ">
+					<p class="separadorfoot"></p>
+					<p class="small">Links de Interés</p>
+					<p class="small">Cliente Único</p>
+					<p class="small">Front Comercial</p>
+					<p class="small">Portal del Empleado</p>
+				</div>
+
+				<div class="logosredes  ">
+
+				</div>
+
+			</div>
+
+			<div class="Suscribirme  form-group col-xs-12 col-xs-12 col-md-6 col-lg-4">
+
+			</div>
+
+		</div>
+	</footer>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="/main.js"></script>
+
+</body>
+
+</html>
