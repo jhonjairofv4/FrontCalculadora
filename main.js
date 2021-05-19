@@ -1,11 +1,14 @@
-
-$("#simuladores").click(function(){
+$("#simuladores").click(function() {
   $("#conversores").html(`
-  		
-  `).animate({opacity: "0.5"}).animate({opacity: "1"})
+    
+`).animate({
+      opacity: "0.5"
+  }).animate({
+      opacity: "1"
+  })
 })
 
-  
+
 
 // api key 94668452b71cc50527735c1301fb6d33
 function llamardatos() {
@@ -16,64 +19,90 @@ function llamardatos() {
           console.log(data.rates.COP);
           console.log(data.rates.USD);
           console.log(data);
-          
-          const exchangesToShow = [];            
-          const fechaTRM = data.date;
-          const valorCopPorCadaEuro = data.rates.COP
-          const valorUsdPorCadaEuro = data.rates.USD
-          const valorCopPorCadaUsd = data.rates.COP / data.rates.USD
-
-          exchangesToShow.push(fechaTRM, valorCopPorCadaEuro, valorUsdPorCadaEuro, valorCopPorCadaUsd)
-
+          const arrayDatosExchange = data;
+          const exchangesToShow = [];
+          arrayDatosExchange.forEach((element) => {
+              let datostoshow = {
+                  fechaTRM: element.date,
+                  valorCopPorCadaEuro: element.rates.COP,
+                  valorUsdPorCadaEuro: element.rates.USD,
+                  valorCopPorCadaUsd: element.rates.COP / element.rates.USD,
+              };
+              exchangesToShow.push(datostoshow);
+          });
           console.log(exchangesToShow)
-
+          generarDatos(exchangesToShow)
       });
 }
 
 
+function generarDatos(exchangesToShow) {
+  let acumulador = ``
+  exchangesToShow.forEach(element =>{
+    acumulador += `<div> ${element.fechaTRM} </div>`
+  })
+  $("#devuelveFechaTrm").html(acumulador)
+}
 
-$("#trm").click(function(){
+
+
+
+$("#trm").click(function() {
   $("#conversores").html(`  
-  <div id="conversores">
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container"> 
-  </div>
+<div id="conversores">
+<div class="jumbotron jumbotron-fluid">
+<div class="container"> 
+</div>
 
-  <div class="separadorfoot" form-group col-xs-12 			col-xs-12 col-md-6 col-lg-4>
-  <button onclick="llamardatos()"> Consultar TRM
-  </button>
-  <br>
-  </div>
-  <div class="container">
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>Fecha de Consulta TRM</th>
-        <th>Valor 1 EURO en Pesos Colombianos </th>
-        <th>Valor 1 USD en Pesos Colombianos </th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>${fechaTRM}</td>
-        <td>${valorCopPorCadaEuro}</td>
-        <td>${valorCopPorCadaUsd}</td>
-        </tr>
-      </tbody>
-  </table>
-  </div>
-
-  
+<div class="separadorfoot" form-group col-xs-12 			col-xs-12 col-md-6 col-lg-4>
+<button onclick="llamardatos()"> Consultar TRM
+</button>
+<br>
+</div>
+<div class="container">
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>Fecha de Consulta TRM</th>
+      <th>Valor 1 EURO en Pesos Colombianos </th>
+      <th>Valor 1 USD en Pesos Colombianos </th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="devuelveFechaTrm">
+      </td>
+      <td>
+      </td>
+      <td>
+      
+      </td>
+      </tr>
+    </tbody>
+</table>
+</div>
 
 
 </div>
-  
- 
-  </div>
-  `).animate({opacity: "0.5"}).animate({opacity: "1"})
+
+
+</div>
+`).animate({
+      opacity: "0.5"
+  }).animate({
+      opacity: "1"
+  })
 })
 
-
+// <td>
+// ${fechaTRM}
+// </td>
+// <td>
+// ${valorCopPorCadaEuro}
+// </td>
+// <td>
+// ${valorCopPorCadaUsd}
+// </td>
 
 
 class ConversorNominalMensualAEfectivaAnual {
@@ -87,30 +116,29 @@ class ConversorNominalMensualAEfectivaAnual {
 
 
 
-  constructor(unMes, mesesDelAnio, tasaNominalMensual,  tasaEfectivaAnual,
-    ) {
+  constructor(unMes, mesesDelAnio, tasaNominalMensual, tasaEfectivaAnual, ) {
 
-    
+
       if (tasaNominalMensual < 0) {
           throw new Error("No puedes convertir tasas negativas");
       }
 
 
-      
+
       if (tasaEfectivaAnual < 0) {
-        throw new Error("No puedes convertir tasas negativas");
-    }
+          throw new Error("No puedes convertir tasas negativas");
+      }
 
 
-    this.unMes = unMes;
-    this.mesesDelAnio = mesesDelAnio;
-    this.tasaNominalMensual = tasaNominalMensual;
-    this.tasaEfectivaAnual = tasaEfectivaAnual;
+      this.unMes = unMes;
+      this.mesesDelAnio = mesesDelAnio;
+      this.tasaNominalMensual = tasaNominalMensual;
+      this.tasaEfectivaAnual = tasaEfectivaAnual;
 
 
   }
 
-  
+
 
   verificartasaNominalMensual() {
 
@@ -133,68 +161,68 @@ class ConversorNominalMensualAEfectivaAnual {
 
       return ((exponencial - this.unMes) * 100)
 
- 
+
   }
 
 
   verificarTasaEfectivaAnual() {
 
-    if (this.tasaEfectivaAnual > 40) {
-        console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
+      if (this.tasaEfectivaAnual > 40) {
+          console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
 
-    } else if (this.tasaEfectivaAnual < 7) {
-        console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
+      } else if (this.tasaEfectivaAnual < 7) {
+          console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
 
-    }
+      }
+  }
+
+  efectivaAnualAnominalMensual() {
+
+      let base = this.unMes + (this.tasaEfectivaAnual / 100);
+      let exponente = this.unMes / this.mesesDelAnio;
+      let exponencial = base **= exponente;
+
+
+      return (((exponencial - this.unMes) * 12) / 12) * 100
+
+  }
+
 }
 
-efectivaAnualAnominalMensual() {
-
-    let base = this.unMes + (this.tasaEfectivaAnual / 100);
-    let exponente = this.unMes / this.mesesDelAnio;
-    let exponencial = base **= exponente;
-
-
-    return (((exponencial - this.unMes) * 12) / 12) * 100
-
-}
-
-}
 
 
 
+document.getElementById("formulario", ).addEventListener("submit", function(e)
 
-document.getElementById("formulario",).addEventListener("submit", function(e) 
+  {
+      e.preventDefault()
+      let valorTasa = document.getElementById("Tasa").value;
+      let convierteNominalMesAEfectivaAnual = new ConversorNominalMensualAEfectivaAnual(1, 12, valorTasa, 0);
 
-{
-  e.preventDefault()
-  let valorTasa = document.getElementById("Tasa").value;
-    let convierteNominalMesAEfectivaAnual = new ConversorNominalMensualAEfectivaAnual(1, 12, valorTasa,0);
+      convierteNominalMesAEfectivaAnual.verificartasaNominalMensual();
 
-  convierteNominalMesAEfectivaAnual.verificartasaNominalMensual();
+      console.log(valorTasa)
 
-  console.log(valorTasa)
-
-  document.getElementById('tasaEAFinal').value = `${(convierteNominalMesAEfectivaAnual.nominalMensualAEfectivaAnual())}`;
+      document.getElementById('tasaEAFinal').value = `${(convierteNominalMesAEfectivaAnual.nominalMensualAEfectivaAnual())}`;
 
   })
 
 
 
-document.getElementById("formularioDos").addEventListener("submit", function(e) 
+document.getElementById("formularioDos").addEventListener("submit", function(e)
 
-{
-  e.preventDefault()
-   let valorTasados = document.getElementById("tasaDos").value;
-  let Convierteefectivaanualanominalmes =  new ConversorNominalMensualAEfectivaAnual(1, 12, 0,valorTasados);
+  {
+      e.preventDefault()
+      let valorTasados = document.getElementById("tasaDos").value;
+      let Convierteefectivaanualanominalmes = new ConversorNominalMensualAEfectivaAnual(1, 12, 0, valorTasados);
 
-  console.log(valorTasados)
+      console.log(valorTasados)
 
-  
-  Convierteefectivaanualanominalmes.verificarTasaEfectivaAnual();
 
-  document.getElementById('tasaNMVFinal').value = `${(Convierteefectivaanualanominalmes.efectivaAnualAnominalMensual())}`;
-})
+      Convierteefectivaanualanominalmes.verificarTasaEfectivaAnual();
+
+      document.getElementById('tasaNMVFinal').value = `${(Convierteefectivaanualanominalmes.efectivaAnualAnominalMensual())}`;
+  })
 
 
 
@@ -237,49 +265,47 @@ class CalculadoraDeInteres {
 }
 
 
-$("#show").click( function(){
-			
+$("#show").click(function() {
+
   let fromDate = $('input[name="fromDate"]').val();
   console.log(fromDate);
-     
+
   let toDate = $('input[name="toDate"]').val();
   console.log(toDate);
-     
- 
+
+
   const date1 = new Date(fromDate);
   const date2 = new Date(toDate);
-     
+
   let diff = 0;
-     
+
   if (date1 && date2) {
-    diff = Math.floor((date2.getTime() - date1.getTime()) / 86400000); 
-    console.log(diff);
+      diff = Math.floor((date2.getTime() - date1.getTime()) / 86400000);
+      console.log(diff);
   }
-     
-  diff = diff;		
+
+  diff = diff;
   $('#dateDiff').val(diff);
- });
+});
 
 
 
 document.getElementById("formularioTres").addEventListener("submit", function(e) {
   e.preventDefault()
-  let diasEntreFechas =  document.getElementById("dateDiff").value;
+  let diasEntreFechas = document.getElementById("dateDiff").value;
   console.log(diasEntreFechas);
-  let valorACalcular =  document.getElementById("valorIngresado").value;
+  let valorACalcular = document.getElementById("valorIngresado").value;
   console.log(valorACalcular);
-  let tasaACalcular =  document.getElementById("tasaIngresada").value;
+  let tasaACalcular = document.getElementById("tasaIngresada").value;
   console.log(tasaACalcular);
-  
+
   let CalcularInteres = new CalculadoraDeInteres(valorACalcular, diasEntreFechas, tasaACalcular);
-  
+
 
   document.getElementById('valorInteresFinal').value = `${(CalcularInteres.calculartasa())}`;
 
 
 })
-
-
 
 
 
@@ -299,37 +325,37 @@ class Tablaamortizacion {
   }
 
 
-interesCuotaUno(){
+  interesCuotaUno() {
 
-  return  (this.valor) * (this.diasPrimerMes) * ((this.tasa / 100) / 30)
+      return (this.valor) * (this.diasPrimerMes) * ((this.tasa / 100) / 30)
+
+  }
 
 }
 
-}
 
+$("#show2").click(function() {
 
-$("#show2").click( function(){
-			
   let fromDate = $('input[name="fromDate2"]').val();
   console.log(fromDate);
-     
+
   let toDate = $('input[name="toDate2"]').val();
   console.log(toDate);
-     
- 
+
+
   const date1 = new Date(fromDate);
   const date2 = new Date(toDate);
-     
+
   let diff = 0;
-     
+
   if (date1 && date2) {
-    diff = Math.floor((date2.getTime() - date1.getTime()) / 86400000); 
-    console.log(diff);
+      diff = Math.floor((date2.getTime() - date1.getTime()) / 86400000);
+      console.log(diff);
   }
-     
-  diff = diff;		
+
+  diff = diff;
   $('#dateDiff2').val(diff);
- });
+});
 
 
 document.getElementById("formularioCuatro").addEventListener("submit", function(e) {
@@ -342,39 +368,38 @@ document.getElementById("formularioCuatro").addEventListener("submit", function(
   console.log(valorDeCompra);
   let valorDeCuotaDeManejo = document.getElementById("valorDeCuotaDeManejo").value;
   console.log(valorDeCuotaDeManejo);
-  let diasPrimerMes =  document.getElementById("dateDiff2").value;
+  let diasPrimerMes = document.getElementById("dateDiff2").value;
   console.log(diasPrimerMes);
-  
 
 
-  
+
+
   let Calculartabla = new Tablaamortizacion(plazoPactado, tasaPactada, valorDeCompra, diasPrimerMes, valorDeCuotaDeManejo);
 
 
 
   document.getElementById('tablaDeAmortizacion').innerHTML = `<div class="container">
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>No. Cuota</th>
-        <th>Valor cuota de manejo</th>
-        <th>Capital</th>
-        <th>Intereses</th>
-        <th>Valor de la cuota</th>
-        <th>Saldo pendiente</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>${plazoPactado}</td>
-        <td>${valorDeCuotaDeManejo}</td>
-        <td>${valorDeCompra}</td>
-        <td>${(Calculartabla.interesCuotaUno())}</td>
-        <td></td>
-        <td>john@example.com</td>
-      </tr>
-      </tbody>
-  </table>
-  </div>`;
-}
-)
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th>No. Cuota</th>
+      <th>Valor cuota de manejo</th>
+      <th>Capital</th>
+      <th>Intereses</th>
+      <th>Valor de la cuota</th>
+      <th>Saldo pendiente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>${plazoPactado}</td>
+      <td>${valorDeCuotaDeManejo}</td>
+      <td>${valorDeCompra}</td>
+      <td>${(Calculartabla.interesCuotaUno())}</td>
+      <td></td>
+      <td>john@example.com</td>
+    </tr>
+    </tbody>
+</table>
+</div>`;
+})
