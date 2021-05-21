@@ -1,12 +1,4 @@
-$("#simuladores").click(function() {
-  $("#conversores").html(`
-    
-`).animate({
-      opacity: "0.5"
-  }).animate({
-      opacity: "1"
-  })
-})
+
 
 
 
@@ -19,14 +11,15 @@ function llamardatos() {
           console.log(data.rates.COP);
           console.log(data.rates.USD);
           console.log(data);
-          const arrayDatosExchange = data;
+
+          
           const exchangesToShow = [];
-          arrayDatosExchange.forEach((element) => {
+          exchangesToShow.forEach((element) => {
               let datostoshow = {
-                  fechaTRM: element.date,
-                  valorCopPorCadaEuro: element.rates.COP,
-                  valorUsdPorCadaEuro: element.rates.USD,
-                  valorCopPorCadaUsd: element.rates.COP / element.rates.USD,
+                  fechaTRM: element.data.date,
+                  valorCopPorCadaEuro: element.data.rates.COP,
+                  valorUsdPorCadaEuro: element.data.rates.USD,
+                  valorCopPorCadaUsd: element.data.rates.COP / element.data.rates.USD,
               };
               exchangesToShow.push(datostoshow);
           });
@@ -34,75 +27,6 @@ function llamardatos() {
           generarDatos(exchangesToShow)
       });
 }
-
-
-function generarDatos(exchangesToShow) {
-  let acumulador = ``
-  exchangesToShow.forEach(element =>{
-    acumulador += `<div> ${element.fechaTRM} </div>`
-  })
-  $("#devuelveFechaTrm").html(acumulador)
-}
-
-
-
-
-$("#trm").click(function() {
-  $("#conversores").html(`  
-<div id="conversores">
-<div class="jumbotron jumbotron-fluid">
-<div class="container"> 
-</div>
-
-<div class="separadorfoot" form-group col-xs-12 			col-xs-12 col-md-6 col-lg-4>
-<button onclick="llamardatos()"> Consultar TRM
-</button>
-<br>
-</div>
-<div class="container">
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th>Fecha de Consulta TRM</th>
-      <th>Valor 1 EURO en Pesos Colombianos </th>
-      <th>Valor 1 USD en Pesos Colombianos </th>
-      </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td id="devuelveFechaTrm">
-      </td>
-      <td>
-      </td>
-      <td>
-      
-      </td>
-      </tr>
-    </tbody>
-</table>
-</div>
-
-
-</div>
-
-
-</div>
-`).animate({
-      opacity: "0.5"
-  }).animate({
-      opacity: "1"
-  })
-})
-
-// <td>
-// ${fechaTRM}
-// </td>
-// <td>
-// ${valorCopPorCadaEuro}
-// </td>
-// <td>
-// ${valorCopPorCadaUsd}
-// </td>
 
 
 class ConversorNominalMensualAEfectivaAnual {
