@@ -1,7 +1,5 @@
 
 
-
-
 // api key 94668452b71cc50527735c1301fb6d33
 function llamardatos() {
   $.get("http://api.exchangeratesapi.io/v1/latest?access_key=94668452b71cc50527735c1301fb6d33",
@@ -16,10 +14,10 @@ function llamardatos() {
           const exchangesToShow = [];
           exchangesToShow.forEach((element) => {
               let datostoshow = {
-                  fechaTRM: element.data.date,
-                  valorCopPorCadaEuro: element.data.rates.COP,
-                  valorUsdPorCadaEuro: element.data.rates.USD,
-                  valorCopPorCadaUsd: element.data.rates.COP / element.data.rates.USD,
+                  fechaTRM: element.date,
+                  valorCopPorCadaEuro: element.rates.COP,
+                  valorUsdPorCadaEuro: element.rates.USD,
+                  valorCopPorCadaUsd: element.rates.COP / element.rates.USD,
               };
               exchangesToShow.push(datostoshow);
           });
@@ -27,6 +25,15 @@ function llamardatos() {
           generarDatos(exchangesToShow)
       });
 }
+
+function generarDatos(exchangesToShow){
+
+}
+
+
+document.getElementById('devuelveFechaTrm').value = `${element.date}`
+document.getElementById('devuelveValorEuroaCOP').value = `${element.rates.COP}`
+document.getElementById('devuelveFechaTrm').value = `${element.rates.COP / element.rates.USD}`
 
 
 class ConversorNominalMensualAEfectivaAnual {
