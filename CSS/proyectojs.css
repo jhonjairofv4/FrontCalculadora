@@ -34,10 +34,15 @@ li {
   position: center;
   text-align: center; }
 
+.descripcion {
+  vertical-align: center;
+  text-align: center; }
+
 .totalfoot {
   padding-top: 0px;
-  display: grid;
-  grid-template-columns: 34% 33% 33%; }
+  justify-content: center;
+  color: white;
+  text-align: center; }
 
 .foot {
   display: grid;
@@ -53,18 +58,6 @@ li {
   display: grid;
   justify-content: center;
   color: white; }
-
-.contacto {
-  letter-spacing: 1px;
-  font-size: 15px;
-  color: white;
-  text-align: center;
-  vertical-align: center; }
-
-.logosredes {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 50px 50px 50px; }
 
 .terminossuscripcion {
   background-color: none;

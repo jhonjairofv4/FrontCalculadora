@@ -2,7 +2,7 @@
 
 function generarDatos(datostoshow){
   $('#devuelveFechaTrm').html(datostoshow.fechaTRM) 
-  $('#devuelveValorEuroaCOP').html(datostoshow.valorCopPorCadaEuro)
+  $('#devuelveValorEuroaCOP').html(`$ ${Math.floor(datostoshow.valorCopPorCadaEuro*100)/100}`)
   $('#devuelveValorUSDaCOP').html(`$ ${Math.floor(datostoshow.valorCopPorCadaUsd *100)/100}`)
   
 }
@@ -26,7 +26,6 @@ function llamardatos() {
             generarDatos(datostoshow)
       });
 }
-
 
 
 
@@ -128,9 +127,10 @@ document.getElementById("formulario", ).addEventListener("submit", function(e)
 
       console.log(valorTasa)
 
-      document.getElementById('tasaEAFinal').value = `${(convierteNominalMesAEfectivaAnual.nominalMensualAEfectivaAnual())}`;
+      document.getElementById('tasaEAFinal').value = `${Math.round(convierteNominalMesAEfectivaAnual.nominalMensualAEfectivaAnual()*1000)/1000} %`;
 
   })
+
 
 
 
@@ -146,7 +146,7 @@ document.getElementById("formularioDos").addEventListener("submit", function(e)
 
       Convierteefectivaanualanominalmes.verificarTasaEfectivaAnual();
 
-      document.getElementById('tasaNMVFinal').value = `${(Convierteefectivaanualanominalmes.efectivaAnualAnominalMensual())}`;
+      document.getElementById('tasaNMVFinal').value = `${Math.round(Convierteefectivaanualanominalmes.efectivaAnualAnominalMensual()*1000)/1000} % `;
   })
 
 
@@ -227,7 +227,7 @@ document.getElementById("formularioTres").addEventListener("submit", function(e)
   let CalcularInteres = new CalculadoraDeInteres(valorACalcular, diasEntreFechas, tasaACalcular);
 
 
-  document.getElementById('valorInteresFinal').value = `${(CalcularInteres.calculartasa())}`;
+  document.getElementById('valorInteresFinal').value = `$ ${Math.round(CalcularInteres.calculartasa()*100)/100}`;
 
 
 })
@@ -257,7 +257,7 @@ class Tablaamortizacion {
   }
 
 
-  
+
 }
 
 
