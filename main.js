@@ -1,5 +1,11 @@
 
 
+function generarDatos(datostoshow){
+  $('#devuelveFechaTrm').html(datostoshow.fechaTRM) 
+  $('#devuelveValorEuroaCOP').html(datostoshow.valorCopPorCadaEuro)
+  $('#devuelveValorUSDaCOP').html(`$ ${Math.floor(datostoshow.valorCopPorCadaUsd *100)/100}`)
+  
+}
 // api key 94668452b71cc50527735c1301fb6d33
 function llamardatos() {
   $.get("http://api.exchangeratesapi.io/v1/latest?access_key=94668452b71cc50527735c1301fb6d33",
@@ -10,30 +16,18 @@ function llamardatos() {
           console.log(data.rates.USD);
           console.log(data);
 
-          
-          const exchangesToShow = [];
-          exchangesToShow.forEach((element) => {
-              let datostoshow = {
-                  fechaTRM: element.date,
-                  valorCopPorCadaEuro: element.rates.COP,
-                  valorUsdPorCadaEuro: element.rates.USD,
-                  valorCopPorCadaUsd: element.rates.COP / element.rates.USD,
-              };
-              exchangesToShow.push(datostoshow);
-          });
-          console.log(exchangesToShow)
-          generarDatos(exchangesToShow)
+          let datostoshow = {
+            fechaTRM: data.date,
+            valorCopPorCadaEuro: data.rates.COP,
+            valorUsdPorCadaEuro: data.rates.USD,
+            valorCopPorCadaUsd: data.rates.COP / data.rates.USD,
+        };
+
+            generarDatos(datostoshow)
       });
 }
 
-function generarDatos(exchangesToShow){
 
-}
-
-
-document.getElementById('devuelveFechaTrm').value = `${element.date}`
-document.getElementById('devuelveValorEuroaCOP').value = `${element.rates.COP}`
-document.getElementById('devuelveFechaTrm').value = `${element.rates.COP / element.rates.USD}`
 
 
 class ConversorNominalMensualAEfectivaAnual {
@@ -262,6 +256,8 @@ class Tablaamortizacion {
 
   }
 
+
+  
 }
 
 
