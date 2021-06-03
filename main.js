@@ -24,38 +24,29 @@ function llamardatos() {
 }
 
 
+const tasaNMVIngresada = []
+const resultadoNMVaEA = []
+
 
 class ConversorNominalMensualAEfectivaAnual {
-
 
   unMes;
   mesesDelAnio;
   tasaNominalMensual;
   tasaEfectivaAnual;
 
-
-
-
   constructor(unMes, mesesDelAnio, tasaNominalMensual, tasaEfectivaAnual, ) {
-
 
       if (tasaNominalMensual < 0) {
           throw new Error("No puedes convertir tasas negativas");
       }
-
-
-
       if (tasaEfectivaAnual < 0) {
           throw new Error("No puedes convertir tasas negativas");
       }
-
-
       this.unMes = unMes;
       this.mesesDelAnio = mesesDelAnio;
       this.tasaNominalMensual = tasaNominalMensual;
       this.tasaEfectivaAnual = tasaEfectivaAnual;
-
-
   }
 
 
@@ -63,10 +54,10 @@ class ConversorNominalMensualAEfectivaAnual {
   verificartasaNominalMensual() {
 
       if (this.tasaNominalMensual > 3) {
-          console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
+          alert("Revisar la tasa ingresada, está fuera de los parametros comunes")
 
       } else if (this.tasaNominalMensual < 0.8) {
-          console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
+          alert("Revisar la tasa ingresada, está fuera de los parametros comunes")
 
       }
   }
@@ -88,10 +79,10 @@ class ConversorNominalMensualAEfectivaAnual {
   verificarTasaEfectivaAnual() {
 
       if (this.tasaEfectivaAnual > 40) {
-          console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
+          alert("Revisar la tasa ingresada, está fuera de los parametros comunes")
 
       } else if (this.tasaEfectivaAnual < 7) {
-          console.warn("Revisar la tasa ingresada, está fuera de los parametros comunes")
+          alert("Revisar la tasa ingresada, está fuera de los parametros comunes")
 
       }
   }
@@ -121,9 +112,15 @@ document.getElementById("formulario", ).addEventListener("submit", function(e)
 
       convierteNominalMesAEfectivaAnual.verificartasaNominalMensual();
 
-      
+      tasaNMVIngresada.push(valorTasa)
+      console.log(tasaNMVIngresada)
+      localStorage.setItem("historialNMVIngresada",tasaNMVIngresada)
 
       document.getElementById('tasaEAFinal').value = `${Math.round(convierteNominalMesAEfectivaAnual.nominalMensualAEfectivaAnual()*1000)/1000} %`;
+
+      resultadoNMVaEA.push(Math.round(convierteNominalMesAEfectivaAnual.nominalMensualAEfectivaAnual()*1000)/1000)
+      console.log(resultadoNMVaEA)
+      localStorage.setItem("historialresultadoNMVaEA",resultadoNMVaEA)
 
   })
 
@@ -149,6 +146,7 @@ document.getElementById("formularioDos").addEventListener("submit", function(e)
  
 
 
+
 class CalculadoraDeInteres {
 
   valor;
@@ -160,8 +158,9 @@ class CalculadoraDeInteres {
 
 
 
-      if (dias == 0) {
+      if (dias == 0) {   
           throw new Error("No puedes calcular intereses con Cero dias");
+          
       } else if (dias < 0) {
           throw new Error("No puedes calcular intereses con dias negativos")
 
@@ -206,6 +205,16 @@ $("#show").click(function() {
 
   diff = diff;
   $('#dateDiff').val(diff);
+
+  if (diff == 0) {   
+   alert("No puedes calcular intereses con Cero dias");
+    
+} else if (diff < 0) {
+    alert("No puedes calcular intereses con dias negativos")
+
+}
+
+
 });
 
 
@@ -222,6 +231,7 @@ document.getElementById("formularioTres").addEventListener("submit", function(e)
 
   document.getElementById('valorInteresFinal').value = `$ ${Math.round(CalcularInteres.calculartasa()*100)/100}`;
 
+  
 
 })
 
